@@ -1,0 +1,9 @@
+@charset "UTF-8";
+#info>div>div{
+	width:100px;
+	text-align: center;
+}
+#info>div>label{
+	border: 1px solid;
+	margin: 0px;
+}

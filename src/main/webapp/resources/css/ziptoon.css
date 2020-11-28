@@ -1,0 +1,152 @@
+@charset "UTF-8";
+@media (min-width: 370px) {
+  .container {
+    width: 100%;
+  }
+    #pcNav{
+   	display: none;
+   }
+  .naverli{
+  	width: 30%;
+  }
+  .naverli > a >img{
+  	width: 100%;
+  	margin: 2px 0;
+  }
+  .daumli > a >img{
+  	width: 100%;
+  	margin: 2px 0;
+  }
+  .daumli{
+  	width: 30%;
+  }
+  body{
+  background-color: aqua;
+  }
+}
+@media (min-width: 410px) {
+  .container {
+    width: 100%;
+  }
+  #pcNav{
+   	display: none;
+   }
+  .swiper-slide >ul >li>a>img{
+  	width:100px!important;
+  	height: 80px!important;
+  }
+  .naverli{
+  	width: 30%;
+  }
+  .naverli > a >img{
+  	width: 100%;
+  	margin: 2px 0;
+  }
+  .daumli > a >img{
+  	width: 100%;
+  	margin: 2px 0;
+  }
+  .daumli{
+  	width: 30%;
+  }
+#footer{
+  	display:flex;
+  }
+   #footer > div.active{
+  	background-color: #dddddd!important;
+  }
+  #footer > div.active > a{
+  	color: white!important;
+  }
+  body{
+  background-color: white;
+  }
+}
+@media (min-width: 500px) {
+  .container {
+    max-width: 500px;
+  }
+  #pcNav{
+   	display: none;
+   }
+  #footer{
+  	display:flex;
+  }
+  #footer > .active{
+  	background-color: #dddddd;
+  }
+  #footer > .active > a{
+  	color: white;
+  }
+  body{
+  background-color: GRAY;
+  padding-bottom: 100px;
+  }
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+  #footer{
+  	display:none;
+  }
+  #pcNav{
+   	display: block;
+   }
+   .naverli{
+   width: 140px;
+   }
+   .naverli > a >img{
+  	width: 140px;
+  	height:100px;
+  	margin: 2px 0;
+  }
+  .daumli{
+  width: 140px;
+  }
+  .daumli > a >img{
+  	width: 140px;
+  	height:100px;
+  	margin: 2px 0;
+  }
+  body{
+  background-color: black;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+   body{
+  background-color: yellow;
+  }
+}
+li > a > img{
+	width: 140px;
+	height: 100px;
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+    
+  }
+ 
+  .carousel{
+  	width:660px!important;
+  	height: 119px!important;
+  }
+   body{
+  background-color: green;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px; 
+  }
+   body{
+  background-color: white;
+  
+  }
+}
