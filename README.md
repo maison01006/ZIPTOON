@@ -9,3 +9,5 @@ matrix factorization과 이미지 분석으로 웹툰을 추천해준다.
 스마트폰과 컴퓨터에서 최적화 화면을 구성하기 위해 진행중이다.
 
 사용기술 : Spring, JDBC, JS,  Bootstrap, Swiper
+
+사이트 : [집툰](http://www.ziptoon.site/)(웹호스팅X)
