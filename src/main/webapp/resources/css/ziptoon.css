@@ -1,5 +1,12 @@
 @charset "UTF-8";
 @media (min-width: 370px) {
+	#joinul>li{
+		width:30%!important;
+		font-size: 80%;
+	}
+		ul>li>div>img{
+		width:100%!important;
+	}
   .container {
     width: 100%;
   }
@@ -22,9 +29,13 @@
   }
   body{
   background-color: aqua;
+  padding-bottom: 70px;
   }
 }
 @media (min-width: 410px) {
+	ul>li>div>img{
+		width:95px!important;
+	}
   .container {
     width: 100%;
   }
@@ -56,9 +67,13 @@
   }
   body{
   background-color: white;
+  padding-bottom: 70px;
   }
 }
 @media (min-width: 500px) {
+	#joinul>li{
+		width:120px!important;
+	}
   .container {
     max-width: 500px;
   }

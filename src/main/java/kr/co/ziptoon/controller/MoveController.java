@@ -306,4 +306,8 @@ public class MoveController {
 	public String goIntroduction() {
 		return "introduction";
 	}
+	@GetMapping("/setting")
+	public String goSetting() {
+		return "setting";
+	}
 }
