@@ -66,10 +66,28 @@
       	
         </div>
       </li>
-      <a class="nav-link" href="login">로그인</a>
+      <c:choose>
+      		<c:when test="${empty userId}">
+      			<li class="nav-item">
+      			 	<a class="nav-link" href="login">로그인</a>
+      			 </li>
+      			 <li class="nav-item">
+      			 	<a class="nav-link" href="join">회원가입</a>
+      			 </li>
+      		</c:when>
+      		<c:otherwise>
+      			<li class="nav-item">
+	      			<p class="nav-link" style="margin:0px;">${userId }</p>
+	      		</li>
+	      		<li class="nav-item">
+	      		 	<a class="nav-link" href="logout">로그아웃</a>
+	      		</li>
+    	  	</c:otherwise>
+      	</c:choose>
+      
     </ul>
     <form class="form-inline my-2 my-lg-0" id="search" action="/search" method="get">
-      <input class="form-control mr-sm-2" type="search" name="id" placeholder="Search" aria-label="Search">
+      <input id="searchInput" class="form-control mr-sm-2" type="search" name="id" placeholder="Search" aria-label="Search">
       <button id="searchBtn" class="btn btn-outline-dark my-2 my-sm-0" type="button" onclick="check()">Search</button>
     </form>
   </div>
@@ -241,7 +259,16 @@
 <script src="resources/js/bootstrap.js"></script> 
 <script type="text/javascript">
 var t="";
-
+	function check(){
+		var form = document.getElementById('search');
+		var input = document.getElementById('searchInput');
+		if(input.value!=''){
+			form.submit();
+		}else{
+			alert('1글자 이상 적어주세요');
+		}
+		
+	}
 	var swiperN = new Swiper('.swiper-container-naver', {
     	slidesPerView: 'auto',
     	spaceBetween: 5,
