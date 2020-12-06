@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="resources/css/bootstrap.css?version=1">
-<link rel="stylesheet" href="resources/css/ziptoon.css">
+<link rel="stylesheet" href="resources/css/ziptoon.css?version=5">
 <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
@@ -14,7 +15,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container" style="padding:0;">
+<div class="container" style="padding:0;" id="pcNav">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/">ZIPTOON</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +28,15 @@
         <a class="nav-link" href="webtoon">모든 웹툰<span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" onclick="minilogin(this)" href="mywebtoon">나의 웹툰</a>
+      <c:choose>
+      	<c:when test="${empty userId}">
+      		<a class="nav-link" href="login">나의 웹툰</a>
+      	</c:when>
+      	<c:otherwise>
+      		<a class="nav-link" href="/">나의 웹툰</a>
+      	</c:otherwise>
+      </c:choose>
+        
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,10 +44,41 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/introduction">사이트 설명</a>
-          <a class="dropdown-item" onclick="minilogin(this)" href="/qna">문의하기</a>
-          <a class="dropdown-item" onclick="minilogin(this)" href="/myqnalist?userId=${userId }">내 문의내역</a>
+          <c:choose>
+      		<c:when test="${empty userId}">
+      			 <a class="dropdown-item"href="login">문의하기</a>
+      		</c:when>
+      		<c:otherwise>
+      			 <a class="dropdown-item" href="/qna">문의하기</a>
+      		</c:otherwise>
+      	</c:choose>
+      	<c:choose>
+      		<c:when test="${empty userId}">
+      			 <a class="dropdown-item" href="login">내 문의내역</a>
+      		</c:when>
+      		<c:otherwise>
+	      		 <a class="dropdown-item" href="/myqnalist?userId=${userId }">내 문의내역</a>
+    	  	</c:otherwise>
+      	</c:choose>
+      	
         </div>
       </li>
+      <c:choose>
+      		<c:when test="${empty userId}">
+      			<li class="nav-item">
+      			 	<a class="nav-link" href="login">로그인</a>
+      			 </li>
+      		</c:when>
+      		<c:otherwise>
+      			<li class="nav-item">
+	      			<p class="nav-link" style="margin:0px;">${userId }</p>
+	      		</li>
+	      		<li class="nav-item">
+	      		 	<a class="nav-link" href="logout.do">로그아웃</a>
+	      		</li>
+    	  	</c:otherwise>
+      	</c:choose>
+      
     </ul>
     <form class="form-inline my-2 my-lg-0" id="search" action="/search" method="get">
       <input class="form-control mr-sm-2" type="search" name="id" placeholder="Search" aria-label="Search">
@@ -47,6 +87,7 @@
   </div>
 </nav>
 </div>
+
 <div style="text-align: center;margin-top: 15px;">
 	<p class="font-weight-bolder" style="font-size:30px;">나의 웹툰 보기</p>
 </div>
@@ -105,6 +146,7 @@ function check(){
 			d = JSON.parse(request.responseText);
 			
 			if(window.innerWidth<1000){
+					webtoonDiv.innerHTML="";
 				   webtoonDiv.append(phon(d));
 				 var swiper = new Swiper('.swiper-container');
 				 swiper.on('slideChange',function(){
@@ -125,12 +167,14 @@ function check(){
 			var div2 = document.createElement('div');
 			var div3 = document.createElement('div');
 			div1.classList.add('swiper-container');
+			div1.style="height:"+(window.innerHeight-350)+"px";
 			div2.classList.add('swiper-wrapper');
-	
+			
 			for(var i=0;i<7;i++){
 				var outdiv = document.createElement('div');
 				outdiv.classList.add('swiper-slide');
 				outdiv.style="width:100%;"
+				
 				
 				var ul = document.createElement('ul');
 				ul.style="text-align:center;padding:0;margin:0 10px 0 10px;";
@@ -138,7 +182,7 @@ function check(){
 				if(data[i].length==0){
 				
 					var li = document.createElement('li');
-					li.style="list-style: none;";
+					li.style="list-style: none;margin:auto;";
 					var p = document.createElement('p');
 					
 					p.innerText=days[i]+"요일의 즐겨찾는 웹툰이 없습니다."
@@ -156,7 +200,7 @@ function check(){
 					}
 					
 					var li = document.createElement('li');
-					li.style="list-style: none; width:33%;";
+					li.style="list-style: none; width:30%;";
 					
 					
 					
@@ -176,9 +220,7 @@ function check(){
 						img.classList.add("border-warning");
 						li.classList.add("daumli");
 					}
-					
-					img.style="width:130px;height:101px";
-					
+										
 					var p = document.createElement('p');
 					p.style='"margin:0; font-size:11px;" text-align ="center"';
 					p.innerText=title;
@@ -274,6 +316,9 @@ function check(){
 
 	window.onload = function(){
 		myPageFunction();
+	}
+	window.onresize = function(){
+		myPageProcess();
 	}
 
 </script>

@@ -63,7 +63,22 @@
       	
         </div>
       </li>
-      <a class="nav-link" href="login">로그인</a>
+      <c:choose>
+      		<c:when test="${empty userId}">
+      			<li class="nav-item">
+      			 	<a class="nav-link" href="login">로그인</a>
+      			 </li>
+      		</c:when>
+      		<c:otherwise>
+      			<li class="nav-item">
+	      			<p class="nav-link" style="margin:0px;">${userId }</p>
+	      		</li>
+	      		<li class="nav-item">
+	      		 	<a class="nav-link" href="logout">로그아웃</a>
+	      		</li>
+    	  	</c:otherwise>
+      	</c:choose>
+      
     </ul>
     <form class="form-inline my-2 my-lg-0" id="search" action="/search" method="get">
       <input class="form-control mr-sm-2" type="search" name="id" placeholder="Search" aria-label="Search">
@@ -151,7 +166,7 @@
 								<li class="daumli" style="list-style: none; margin:0 3px;">
 							</c:when>
 						</c:choose>
-						<a href="<c:url value='${w.id }'/>"style="color:black;" >
+						<a href='<c:url value="/toon?id=${w.id }&page=0"/>' style="color:black;" >
 						<c:set var="id" value="${w.id }"/>
 						
 						<c:choose>
@@ -189,7 +204,7 @@
 								<li class="daumli" style="list-style: none; margin:0 3px;">
 							</c:when>
 						</c:choose>
-						<a href="<c:url value='${w.id }'/>"style="color:black;" >
+						<a href='<c:url value="/toon?id=${w.id }&page=0"/>' style="color:black;" >
 						<c:set var="id" value="${w.id }"/>
 						
 						<c:choose>
@@ -228,7 +243,7 @@
 							</c:when>
 						</c:choose>
 					
-						<a href="<c:url value='${w.id }'/>"style="color:black;" >
+					<a href='<c:url value="/toon?id=${w.id }&page=0"/>' style="color:black;" >
 						<c:set var="id" value="${w.id }"/>
 						
 						<c:choose>
@@ -266,7 +281,7 @@
 								<li class="daumli" style="list-style: none;margin:0 3px;">
 							</c:when>
 						</c:choose>
-						<a href="<c:url value='${w.id }'/>"style="color:black;" >
+						<a href='<c:url value="/toon?id=${w.id }&page=0"/>' style="color:black;" >
 						<c:set var="id" value="${w.id }"/>
 						
 						<c:choose>
@@ -304,7 +319,7 @@
 								<li class="daumli" style="list-style: none;margin:0 3px;">
 							</c:when>
 						</c:choose>
-						<a href="<c:url value='${w.id }'/>"style="color:black;" >
+						<a href='<c:url value="/toon?id=${w.id }&page=0"/>' style="color:black;" >
 						<c:set var="id" value="${w.id }"/>
 						
 						<c:choose>
@@ -342,7 +357,7 @@
 								<li class="daumli" style="list-style: none;margin:0 3px;">
 							</c:when>
 						</c:choose>
-						<a href="<c:url value='${w.id }'/>"style="color:black;" >
+						<a href='<c:url value="/toon?id=${w.id }&page=0"/>' style="color:black;" >
 						<c:set var="id" value="${w.id }"/>
 						
 						<c:choose>
