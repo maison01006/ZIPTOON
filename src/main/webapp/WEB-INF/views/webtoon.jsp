@@ -556,7 +556,7 @@ var swiper = new Swiper('.swiper-container',{
 		return div2;
 	}
 	function initGetWebtoon(){
-		
+		console.log(swiper.activeIndex);
 		 if(swiper.activeIndex==0){
 			 webtoonFunction(1);
 		 }else if(swiper.activeIndex==6){
@@ -627,7 +627,7 @@ var swiper = new Swiper('.swiper-container',{
 		swiper.slideTo ( num , 300);
 	}
 	window.onload= function(){
-		days.children[date.getDay()].classList.add('active');
+		days.children[swiper.activeIndex].classList.add('active');
 		swiper.on('init',function(){
 			initGetWebtoon();
 		})
@@ -636,6 +636,7 @@ var swiper = new Swiper('.swiper-container',{
 				 days.children[i].classList.remove('active');
 			 }
 			 days.children[swiper.activeIndex].classList.add('active');
+			 
 		 });
 		 swiper.on('transitionEnd',function(){
 			 

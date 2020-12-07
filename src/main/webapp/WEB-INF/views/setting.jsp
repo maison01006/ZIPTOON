@@ -88,10 +88,31 @@
 	설정
 </div>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">로그인</li>
-  <li class="list-group-item">문의 하기</li>
-  <li class="list-group-item">문의 내역</li>
-  <li class="list-group-item">사이트 소개</li>
+<c:if test="${empty userId }">
+	<li class="list-group-item">
+		<a href="login">로그인</a>
+	</li>
+  	<li class="list-group-item">
+  		<a href="login">문의 하기</a>
+  	</li>
+  	<li class="list-group-item">
+  		<a href="login">문의 내역</a>
+  	</li>
+</c:if>
+<c:if test="${not empty userId }">
+	<li class="list-group-item">
+		<a href="logout.do">로그아웃</a>
+	</li>
+  	<li class="list-group-item">
+  		<a href="qna">문의 하기</a>
+  	</li>
+  	<li class="list-group-item">
+  		<a href="/myqnalist?userId=${userId }">문의 내역</a>
+  	</li>
+</c:if>
+  <li class="list-group-item">
+  	<a href="introduction">사이트 소개</a>
+  </li>
 </ul>
 </div>
 </body>

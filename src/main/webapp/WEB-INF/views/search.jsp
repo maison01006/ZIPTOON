@@ -85,10 +85,18 @@
 
 <div class="container">
 	<div style="text-align: center;margin:20px 0 20px 0;">
-		<h4>"${title }"의 검색 결과</h4>
+			<h3>Search</h3>
+	</div>
+	<div style="text-align: center;margin:20px 0 20px 0;">
+		<input id="titleInput" type="text" placeholder="제목"/>
+		<button onclick="search()">검색</button>
+		<c:if test="'${not empty title }">
+			<h4>"${title }"의 검색 결과</h4>
+		</c:if>
+		
 	</div>
 	<div id="webtoon" style="border: 1px solid #dddddd; ">
-	
+		
 	</div>
 
 </div>
@@ -173,57 +181,64 @@ function minilogin(obj){
 			form.submit();
 		}
 	}
-	function webtoonFunction() {
-		request.open("Get", "./searchWebtoon?id="+'${title}', true);
+	function search(){
+		var input = document.getElementById('titleInput');
+		webtoonFunction(input.value);		
+	}
+	function webtoonFunction(title) {
+		request.open("Get", "./searchWebtoon?id="+title, true);
 		request.onreadystatechange = webtoonProcess;
 		request.send(null);
 	}
 	function webtoonProcess() {
 		if (request.readyState == 4 && request.status == 200) {
 			d = JSON.parse(request.responseText);
+			webtoon.innerHTML="";
 			webtoon.append(createUl(d));
 		}
 	}
 	function createUl(data){
 		var ul = document.createElement('ul');
 		ul.classList.add('row');
-		ul.style.margin='20px 0 20px 0';
+		ul.classList.add('justify-content-center');
+		ul.style="margin:0px; padding: 0px;";
+		
 		for(var i=0;i<data.length;i++){
 			var li = document.createElement('li');
-			var div = document.createElement('div');
 			var a = document.createElement('a');
-			var p = document.createElement('p');
 			var img = document.createElement('img');
-			
-			li.style.listStyle="none";
-			li.style.margin="0 5px";
+			var p = document.createElement('p');
+
+			li.style="list-style: none;margin:0 3px;";
+			if(data[i]['web']=='naver'){
+				li.classList.add('naverli');
+				img.classList.add('border-success');
+			}else if(data[i]['web']=='daum'){
+				li.classList.add('daumli');
+				img.classList.add('border-warning');
+			}
 			a.href="/toon?id="+data[i].title+"&page=0";
+			a.style="color:black;";
+			img.classList.add('rounded-lg');
+			img.classList.add('border');
+			img.src=data[i].img;
+			p.style="margin:0; font-size:80%; text-align:center;";
 			if(data[i].title.length>7){
 				p.innerText=data[i].title.substring(0,7)+"...";
-				
 			}else{
 				p.innerText=data[i].title;
 			}
-			p.style.color="black";
-			img.src = data[i].img;
-			img.style.width="130px";
-			img.style.height="101px";
-			if(data[i].web=='naver'){
-				div.style.backgroundColor="green";
-			}else if(data[i].web=='daum'){
-				div.style.backgroundColor="#ffc107";
-			}
-			div.style.height="10px";
 			
-			a.append(div);
 			a.append(img);
 			a.append(p);
 			li.append(a);
 			ul.append(li);
 		}
+		
 		return ul;
 	}
 	window.onload=function(){
-		webtoonFunction();
+		if('${title}'!='')
+			webtoonFunction('${title}');
 	}
 </script>
