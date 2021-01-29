@@ -65,6 +65,13 @@ public class MoveController {
 	public String goTest() {
 		return "test";
 	}
+	@GetMapping("/video")
+	public String goVideo(HttpSession session) {
+		if(session.getAttribute("userId").equals("viedo")) {
+			return "video";
+		}
+		return "/";
+	}
 	@GetMapping("/webtoon")
 	public String goWebtoon(Model model) {
 		Calendar cal = Calendar.getInstance(); 

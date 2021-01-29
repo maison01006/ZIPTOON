@@ -127,7 +127,9 @@
 						<a style="color: black" onclick="watch(this);" target="_black"href="${webtoon.url }"> 
 							<div class="row">
 								<img src="<c:url value='${webtoon.img }'/>" /> 
-								<p style="text-align:center; width:150px; overflow: hidden;text-overflow: ellipsis;"><c:out value='${webtoon.episode }' />
+								<div class="col row justify-content-center">
+									<p style="text-align:center; overflow: hidden;text-overflow: ellipsis;"><c:out value='${webtoon.episode }' />
+								</div>
 								</p>
 							</div>
 					</a></li>

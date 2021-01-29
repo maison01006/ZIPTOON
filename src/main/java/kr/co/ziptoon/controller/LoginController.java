@@ -35,8 +35,12 @@ public class LoginController {
 			session.setAttribute("userId", userList.get(0).getId());
 			session.setAttribute("type", userList.get(0).getType());
 			userService.updateLast(vo);
+			System.out.println(vo.getId());
 			if(userList.get(0).getType()==1) {
 				return "redirect:manager";
+			}else if(userList.get(0).getType()==2) {
+				System.out.println("들어옴");
+				return "redirect:video";
 			}
 
 			return "redirect:/";
