@@ -17,6 +17,3 @@ matrix factorization과 이미지 분석으로 웹툰을 추천해준다.
 Bootstrap를 이용하여 최적화 완료 ✔
 
 matrix factorization 알고리즘을 구현하였지만 데이터가 부족하여 보류 ⛔
-
-~~이미지 분석을 위해 cnn위주로 공부중 ⏳~~
-데이터가 부족하여 보류 ⛔
